@@ -1,5 +1,5 @@
 import { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 import MarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
@@ -79,8 +79,8 @@ class CharList extends Component {
             this.props.onCharSelected(item.id);
             this.focusOnItem(indx);
           }}
-          onKeyDown={event => {
-            if(event.key === 'Enter'){
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
               this.props.onCharSelected(item.id);
               this.focusOnItem(indx);
             }
@@ -124,6 +124,6 @@ class CharList extends Component {
 
 CharList.propTypes = {
   onCharSelected: PropTypes.func.isRequired,
-}
+};
 
 export default CharList;

@@ -14,6 +14,6 @@ const ErrorMessage = () => {
       alt="Error"
     ></img>
   );
-}
+};
 
 export default ErrorMessage;

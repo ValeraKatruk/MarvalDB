@@ -1,38 +1,38 @@
-import { Component } from 'react';
-import Spinner from '../spinner/Spinner'
-import ErrorMessage from '../errorMessage/ErrorMessage'
-import MarvelService from '../../services/MarvelService';
+import { Component } from "react";
+import Spinner from "../spinner/Spinner";
+import ErrorMessage from "../errorMessage/ErrorMessage";
+import MarvelService from "../../services/MarvelService";
 
-import './randomChar.scss';
-import mjolnir from '../../resources/img/mjolnir.png';
+import "./randomChar.scss";
+import mjolnir from "../../resources/img/mjolnir.png";
 
 class RandomChar extends Component {
   state = {
     char: {},
     loading: true,
-    error: false
+    error: false,
   };
 
   marvelService = new MarvelService();
 
-  componentDidMount(){
-    this.updateChar()
+  componentDidMount() {
+    this.updateChar();
     // this.timerId = setInterval(this.updateChar, 3000);
   }
 
-  componentWillUnmount(){
-    clearInterval(this.timerId)
+  componentWillUnmount() {
+    clearInterval(this.timerId);
   }
 
   onCharLoaded = (char) => {
-    this.setState({char, loading: false });
+    this.setState({ char, loading: false });
   };
 
   onCharLoading = () => {
     this.setState({
-        loading: true
-    })
-}
+      loading: true,
+    });
+  };
 
   onError = () => {
     this.setState({ loading: false, error: true });
@@ -40,18 +40,15 @@ class RandomChar extends Component {
 
   updateChar = () => {
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-    this.onCharLoading()
-    this.marvelService
-        .getCharacter(id)
-        .then(this.onCharLoaded)
-        .catch(this.onError)
+    this.onCharLoading();
+    this.marvelService.getCharacter(id).then(this.onCharLoaded).catch(this.onError);
   };
 
   render() {
     const { char, loading, error } = this.state;
-    const errorMessage = error ? <ErrorMessage/> : null;
+    const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = !(error || loading) ? <View char={char}/> : null;
+    const content = !(error || loading) ? <View char={char} /> : null;
     return (
       <div className="randomchar">
         {errorMessage}
@@ -76,9 +73,9 @@ class RandomChar extends Component {
 
 const View = ({ char }) => {
   const { name, description, thumbnail, homepage, wiki } = char;
-  let imgStyle = { 'objectFit': "cover" };
+  let imgStyle = { objectFit: "cover" };
   if (thumbnail.includes("image_not_available")) {
-    imgStyle = { 'objectFit': "contain" };
+    imgStyle = { objectFit: "contain" };
   }
 
   return (

@@ -12,19 +12,18 @@ class MarvelService {
   };
 
   getAllCharacters = async (offset = this._baseOffset) => {
-    const res = await this.getRecource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);  
+    const res = await this.getRecource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);
     return res.data.results.map(this._transformCharacter);
   };
 
   logger = () => {
     console.log();
-  }
+  };
 
   getCharacter = async (id) => {
     const res = await this.getRecource(`${this._apiBase}characters/${id}?${this._apiKey}`);
     return this._transformCharacter(res.data.results[0]);
   };
-
 
   _transformCharacter = (char) => {
     return {
@@ -34,7 +33,7 @@ class MarvelService {
       thumbnail: char.thumbnail.path + "." + char.thumbnail.extension,
       homepage: char.urls[0].url,
       wiki: char.urls[1].url,
-      comics: char.comics.items
+      comics: char.comics.items,
     };
   };
 }
